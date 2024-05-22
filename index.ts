@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 const randomNumber = Math.floor(Math.random() * 6 + 1);
 
@@ -8,11 +9,12 @@ const answers = await inquirer.prompt([
   {
     name: "userGuessedNumber",
     type: "number",
-    message: chalk.italic.overline("please guess a number between 1-6")},
+    message: chalk.greenBright(chalk.italic("please guess a number between 1-6"))
+  },
 ]);
 
 if (answers.userGuessedNumber === randomNumber) {
-  console.log("Congratulations! you guessed right number.");
+  console.log(chalk.bold(chalk.blue("Congratulations! you guessed right number.")))
 } else {
-  console.log("You guessed wrong number.");
-}
+  console.log(chalk.red("You guessed wrong number."))
+};

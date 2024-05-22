@@ -1,6 +1,6 @@
 {
   "name": "mshk2-cli-number-guessing",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "This is a cli based numbers guessing game",
   "main": "index.js",
   "type": "module",
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^5.3.0",
     "inquirer": "^9.2.16",
     "mshk2-cli-number-guessing": "^1.0.0"
   },
