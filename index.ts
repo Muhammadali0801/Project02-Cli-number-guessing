@@ -3,18 +3,51 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 
-const randomNumber = Math.floor(Math.random() * 6 + 1);
+console.log("*************************");
+console.log(chalk.yellow("Welcome to the number guessing game!"));
+console.log("*************************\n");
 
-const answers = await inquirer.prompt([
-  {
-    name: "userGuessedNumber",
-    type: "number",
-    message: chalk.greenBright(chalk.italic("please guess a number between 1-6"))
-  },
-]);
+async function more() {
+  let continuePlaying = true;
+  while (continuePlaying) {
 
-if (answers.userGuessedNumber === randomNumber) {
-  console.log(chalk.bold(chalk.blue("Congratulations! you guessed right number.")))
-} else {
-  console.log(chalk.red("You guessed wrong number."))
-};
+    const randomNumber = Math.floor(Math.random() * 6 + 1);
+
+    const answers = await inquirer.prompt([
+      {
+        name: "userGuessedNumber",
+        type: "number",
+        message: chalk.greenBright(
+          chalk.italic("Please guess a number between 1-6")
+        ),
+        validate: (input) =>{
+          if (input < 1 || input > 6){
+            return chalk.red("Please enter a number between 1 and 6.")
+          }
+          return true;
+        },
+      },
+    ]);
+
+    if (answers.userGuessedNumber === randomNumber) {
+      console.log(
+        chalk.bold(chalk.blue("Congratulations! You guessed the right number."))
+      );
+    } else {
+      console.log(chalk.red("You guessed the wrong number."));
+    }
+
+    const { confirm } = await inquirer.prompt({
+      name: "confirm",
+      type: "confirm",
+      message: chalk.cyanBright("Do you want to play again?"),
+      default: false,
+    });
+
+    continuePlaying = confirm;
+  }
+
+  console.log(chalk.yellow("Thank you for playing!"));
+}
+
+more();
